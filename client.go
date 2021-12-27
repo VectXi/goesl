@@ -100,10 +100,12 @@ func NewClient(host string, port uint, passwd string, timeout int) (*Client, err
 		return nil, err
 	}
 
-	err = client.Authenticate()
-	if err != nil {
-		client.Close()
-		return nil, err
+	if passwd != "" {
+		err = client.Authenticate()
+		if err != nil {
+			client.Close()
+			return nil, err
+		}
 	}
 
 	return &client, nil

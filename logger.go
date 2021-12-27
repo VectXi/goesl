@@ -14,6 +14,7 @@ import (
 
 var (
 	log = logging.MustGetLogger("goesl")
+	DebugMode = true
 
 	// Example format string. Everything except the message has a custom color
 	// which is dependent on the log level. Many fields have a custom output
@@ -24,7 +25,9 @@ var (
 )
 
 func Debug(message string, args ...interface{}) {
-	log.Debugf(message, args...)
+	if DebugMode {
+		log.Debugf(message, args...)
+	}
 }
 
 func Error(message string, args ...interface{}) {
@@ -32,7 +35,9 @@ func Error(message string, args ...interface{}) {
 }
 
 func Notice(message string, args ...interface{}) {
-	log.Noticef(message, args...)
+	if DebugMode {
+		log.Noticef(message, args...)
+	}
 }
 
 func Info(message string, args ...interface{}) {
